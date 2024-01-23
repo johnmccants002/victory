@@ -2,9 +2,10 @@ import { StyleSheet } from "react-native";
 
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
+import ProfileScreen from "../../components/ProfileScreen";
 
 export default function Profile() {
-  return <View style={styles.container}></View>;
+  return <ProfileScreen />;
 }
 
 const styles = StyleSheet.create({
