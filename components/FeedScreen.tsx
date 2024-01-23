@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Text,
+  RefreshControl,
 } from "react-native";
 import Post from "./Post"; // Import the Post component
 import { posts } from "../data/DummyData"; // Import your dummy data
@@ -36,9 +37,15 @@ const FeedScreen = () => {
             </View>
           )
         }
-        data={empty}
+        data={posts}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={() => console.log("Grabbing new posts")}
+          />
+        }
       />
     </View>
   );
