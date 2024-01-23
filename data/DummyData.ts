@@ -1,7 +1,7 @@
 export const posts = [
   {
     id: 1,
-    profileImage: "https://example.com/profiles/user1.jpg",
+    profileImage: "https://i.imgur.com/hCwHtRc.png",
     name: "John Doe",
     text: "This is the text of the first post.",
     postImage: "https://example.com/posts/post1.jpg",
@@ -9,14 +9,14 @@ export const posts = [
   },
   {
     id: 2,
-    profileImage: "https://example.com/profiles/user2.jpg",
-    name: "Jane Smith",
-    text: "This is the text of the second post.",
+    profileImage: "https://i.imgur.com/y1SvStU.png",
+    name: "Banana Cat",
+    text: "Just did 50 push ups",
     dateTime: "2024-01-21T15:30:00Z",
   },
   {
     id: 3,
-    profileImage: "https://example.com/profiles/user3.jpg",
+    profileImage: "https://i.imgur.com/hCwHtRc.png",
     name: "Alice Johnson",
     text: "This is the text of the third post.",
     postImage: "https://example.com/posts/post3.jpg",

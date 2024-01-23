@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 interface PostProps {
@@ -21,12 +28,39 @@ const Post: React.FC<PostProps> = ({
   onRespect,
   dateTime,
 }) => {
+  const handleSettingsPress = () => {
+    Alert.alert(
+      "Report",
+      "Do you want to report this post?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "Report", onPress: () => handleReport() },
+      ],
+      { cancelable: true }
+    );
+  };
+
+  const handleReport = () => {
+    // Perform any additional logic for reporting the post here
+    // ...
+
+    // Display a success message
+    Alert.alert("Success", "Successfully Reported");
+  };
+
   return (
     <View style={styles.postContainer}>
       <View style={styles.header}>
         <Image source={{ uri: profileImage }} style={styles.profileImage} />
         <Text style={styles.name}>{name}</Text>
-        <TouchableOpacity style={styles.settingsIcon}>
+        <TouchableOpacity
+          style={styles.settingsIcon}
+          onPress={handleSettingsPress}
+        >
           <FontAwesome name="caret-down" size={20} />
         </TouchableOpacity>
       </View>
