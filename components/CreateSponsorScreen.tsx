@@ -39,6 +39,17 @@ const CreateSponsorScreen: React.FC = () => {
     }
   };
 
+  const calculateTotalCost = () => {
+    const amountPerVictory = parseFloat(moneyPerVictory);
+    const victories = parseInt(totalVictories, 10);
+    const bonus = parseFloat(completionBonus);
+
+    if (!isNaN(amountPerVictory) && !isNaN(victories) && !isNaN(bonus)) {
+      return amountPerVictory * victories + bonus;
+    }
+    return 0;
+  };
+
   const handleSelectFriend = (friend: { name: string; imageUrl: string }) => {
     setSelectedFriend(friend);
     setSearchQuery(""); // Clear search query
@@ -136,6 +147,12 @@ const CreateSponsorScreen: React.FC = () => {
             onChangeText={setCompletionBonus}
           />
         </View>
+        <View style={styles.totalCostContainer}>
+          <Text style={styles.totalCostText}>Total Cost:</Text>
+          <Text style={styles.totalCostValue}>
+            ${calculateTotalCost().toFixed(2)}
+          </Text>
+        </View>
 
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Create Sponsorship</Text>
@@ -230,6 +247,28 @@ const styles = StyleSheet.create({
   removeButtonText: {
     fontSize: 16,
     color: "red",
+  },
+  totalCostContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 15,
+    marginHorizontal: 20,
+    backgroundColor: "#f9f9f9",
+    borderRadius: 10,
+    marginTop: 20,
+    borderWidth: 1,
+    borderColor: "#ddd",
+  },
+  totalCostText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  totalCostValue: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "green",
   },
 });
 

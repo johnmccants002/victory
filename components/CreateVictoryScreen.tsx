@@ -50,29 +50,37 @@ const CreateVictoryScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter Victory text"
-        value={victoryText}
-        onChangeText={setVictoryText}
-      />
-      <View
-        style={{
-          flexDirection: "row-reverse",
-          width: "100%",
-          marginLeft: 20,
-        }}
-      >
-        <TouchableOpacity onPress={handleChooseImage}>
-          <MaterialCommunityIcons
-            name="image-plus"
-            size={50}
-            color={"#5856D6"}
+      <View style={{ flex: 1, justifyContent: "space-between" }}>
+        <View>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Victory text"
+            value={victoryText}
+            onChangeText={setVictoryText}
           />
+          <View
+            style={{
+              flexDirection: "row-reverse",
+              width: "100%",
+              marginLeft: 20,
+            }}
+          >
+            <TouchableOpacity onPress={handleChooseImage}>
+              <MaterialCommunityIcons
+                name="image-plus"
+                size={50}
+                color={"#5856D6"}
+              />
+            </TouchableOpacity>
+          </View>
+          {imageUri && (
+            <Image style={styles.image} source={{ uri: imageUri }} />
+          )}
+        </View>
+        <TouchableOpacity style={styles.button} onPress={createVictory}>
+          <Text style={styles.buttonText}>Create Victory</Text>
         </TouchableOpacity>
       </View>
-      {imageUri && <Image style={styles.image} source={{ uri: imageUri }} />}
-      <Button title="Create Victory" onPress={createVictory} />
     </View>
   );
 };
@@ -84,7 +92,6 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     backgroundColor: "white",
     paddingTop: 20,
-    paddingHorizontal: 10,
   },
   label: {
     fontSize: 24,
@@ -101,6 +108,17 @@ const styles = StyleSheet.create({
     height: 80,
     resizeMode: "contain",
     marginBottom: 16,
+  },
+  button: {
+    backgroundColor: "#007bff",
+    padding: 28,
+    borderRadius: 5,
+    width: "100%",
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
   },
 });
 

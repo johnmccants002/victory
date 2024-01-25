@@ -84,7 +84,7 @@ const SponsorScreen = () => {
               <Text style={styles.dateText}> 20-26</Text>
             </View>
 
-            <Text style={styles.dayTokenText}>¥400.00</Text>
+            <Text style={styles.dayTokenText}>$400.00</Text>
           </View>
 
           <View
@@ -167,7 +167,7 @@ const SponsorScreen = () => {
                 color: "black",
               }}
             >
-              ¥100
+              $100
             </Text>
             <Ionicons
               name="chevron-forward-sharp"
@@ -225,7 +225,7 @@ const SponsorScreen = () => {
                 color: "black",
               }}
             >
-              ¥300
+              $300
             </Text>
             <Ionicons
               name="chevron-forward-sharp"
