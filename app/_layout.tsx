@@ -75,6 +75,7 @@ function RootLayoutNav() {
             ),
           }}
         />
+        <Stack.Screen name={"settings"} options={{ title: "Settings" }} />
         <Stack.Screen
           name="sponsordetail"
           options={{ title: "Sponsor Details" }}
