@@ -14,6 +14,11 @@ import {
 import { posts } from "../data/DummyData";
 import Post from "./Post";
 
+const progresStatus = {
+  inProgress: { title: "In Progress", color: "red" },
+  completed: { title: "Completed", color: "green" },
+};
+
 type Props = {
   // Add any props you need, like user details, sponsorship details, etc.
 };
@@ -28,10 +33,14 @@ const SponsorDetailScreen = (props: Props) => {
   const moneyPerVictory = 10; // Example value
   const totalVictories = 50; // Example value
   const completionBonus = 100; // Example value
+  const currentVictories = 30;
+  const [status, setStatus] = useState(progresStatus.inProgress);
+  console.log(status.title);
   const handleMessage = () => {
     // Handle message logic
     console.log("Message Pressed");
   };
+
   const renderItem = ({ item }) => (
     <Post
       profileImage={item.profileImage}
@@ -85,13 +94,29 @@ const SponsorDetailScreen = (props: Props) => {
           <Text style={styles.sponsorDetailsTitle}>Sponsor Details</Text>
 
           <View style={styles.detailItem}>
+            <Text style={styles.detailTitle}>Status: </Text>
+            <Text style={{ color: "red", fontSize: 16, fontWeight: "500" }}>
+              In Progress
+            </Text>
+          </View>
+
+          <View style={styles.detailItem}>
             <Text style={styles.detailTitle}>Money per Victory:</Text>
             <Text style={styles.detailValue}>${moneyPerVictory}</Text>
           </View>
 
           <View style={styles.detailItem}>
             <Text style={styles.detailTitle}>Total Victories:</Text>
-            <Text style={styles.detailValue}>{totalVictories}</Text>
+            <Text
+              style={styles.detailValue}
+            >{`${currentVictories} / ${totalVictories}`}</Text>
+          </View>
+
+          <View style={styles.detailItem}>
+            <Text style={styles.detailTitle}>Total Earned:</Text>
+            <Text style={styles.detailValue}>
+              ${currentVictories * moneyPerVictory}
+            </Text>
           </View>
 
           <View style={styles.detailItem}>

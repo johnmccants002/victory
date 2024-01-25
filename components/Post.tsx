@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Pressable,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Link } from "expo-router";
 
 interface PostProps {
   profileImage: string;
@@ -55,7 +57,16 @@ const Post: React.FC<PostProps> = ({
   return (
     <View style={styles.postContainer}>
       <View style={styles.header}>
-        <Image source={{ uri: profileImage }} style={styles.profileImage} />
+        <Link href="/userprofile" asChild>
+          <Pressable>
+            {({ pressed }) => (
+              <Image
+                source={{ uri: profileImage }}
+                style={styles.profileImage}
+              />
+            )}
+          </Pressable>
+        </Link>
         <Text style={styles.name}>{name}</Text>
         <TouchableOpacity
           style={styles.settingsIcon}
