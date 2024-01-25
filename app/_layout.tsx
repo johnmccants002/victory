@@ -5,9 +5,10 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { Link, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { Pressable, useColorScheme } from "react-native";
+import Colors from "../constants/Colors";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -54,7 +55,26 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ title: "Create Victory" }} />
-        <Stack.Screen name="sponsors" options={{ title: "Your Sponsors" }} />
+        <Stack.Screen
+          name="sponsors"
+          options={{
+            title: "Your Sponsors",
+            headerRight: () => (
+              <Link href="/createsponsor" asChild>
+                <Pressable>
+                  {({ pressed }) => (
+                    <FontAwesome
+                      name="user-plus"
+                      size={25}
+                      color={Colors[colorScheme ?? "light"].text}
+                      style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              </Link>
+            ),
+          }}
+        />
         <Stack.Screen
           name="sponsordetails"
           options={{ title: "Sponsor Details" }}

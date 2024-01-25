@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   sponsorDetailsTitle: {
     fontWeight: "bold",
     fontSize: 20,
-    marginBottom: 10,
+    marginBottom: 16,
     color: "#333", // Dark color for the title
     textAlign: "center",
   },
