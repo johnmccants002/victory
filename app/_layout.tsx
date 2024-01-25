@@ -79,6 +79,7 @@ function RootLayoutNav() {
           name="sponsordetails"
           options={{ title: "Sponsor Details" }}
         />
+        <Stack.Screen name="createsponsor" options={{ title: "New Sponsor" }} />
       </Stack>
     </ThemeProvider>
   );
