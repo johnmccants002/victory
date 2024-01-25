@@ -8,10 +8,12 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  Pressable,
 } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
 
 const SponsorScreen = () => {
   const redeemTokens = () => {};
@@ -121,30 +123,36 @@ const SponsorScreen = () => {
             borderBottomColor: "gainsboro",
           }}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Image
-              source={{
-                uri: "https://media.istockphoto.com/id/1338134336/photo/headshot-portrait-african-30s-man-smile-look-at-camera.jpg?b=1&s=170667a&w=0&k=20&c=j-oMdWCMLx5rIx-_W33o3q3aW9CiAWEvv9XrJQ3fTMU=",
-              }}
-              style={{ width: 30, height: 30, borderRadius: 15 }}
-            />
-            <Text
-              style={{
-                fontWeight: "500",
-                fontSize: 14,
-                color: "black",
-                marginLeft: 8,
-              }}
-            >
-              Terry Jones
-            </Text>
-          </View>
+          <Link href="/sponsordetail" asChild>
+            <Pressable>
+              {({ pressed }) => (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image
+                    source={{
+                      uri: "https://media.istockphoto.com/id/1338134336/photo/headshot-portrait-african-30s-man-smile-look-at-camera.jpg?b=1&s=170667a&w=0&k=20&c=j-oMdWCMLx5rIx-_W33o3q3aW9CiAWEvv9XrJQ3fTMU=",
+                    }}
+                    style={{ width: 30, height: 30, borderRadius: 15 }}
+                  />
+                  <Text
+                    style={{
+                      fontWeight: "500",
+                      fontSize: 14,
+                      color: "black",
+                      marginLeft: 8,
+                    }}
+                  >
+                    Terry Jones
+                  </Text>
+                </View>
+              )}
+            </Pressable>
+          </Link>
           <View
             style={{
               alignItems: "center",
@@ -169,6 +177,7 @@ const SponsorScreen = () => {
             />
           </View>
         </View>
+
         <View
           style={{
             flexDirection: "row",

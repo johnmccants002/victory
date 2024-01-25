@@ -55,6 +55,10 @@ function RootLayoutNav() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ title: "Create Victory" }} />
         <Stack.Screen name="sponsors" options={{ title: "Your Sponsors" }} />
+        <Stack.Screen
+          name="sponsordetails"
+          options={{ title: "Sponsor Details" }}
+        />
       </Stack>
     </ThemeProvider>
   );

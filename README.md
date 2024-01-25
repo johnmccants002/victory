@@ -5,29 +5,19 @@ Main Idea: To incentivize friends to take productive actions. Attempting to make
 Tabs:
 
 Feed,
-Profile Menu like thing
-    - Sponsors
-    - Messages
-    - Profile
-    - Settings
-    - Activity
+Profile Menu like thing - Sponsors - Messages - Profile - Settings - Activity
 
-Main Feed: 
+Main Feed:
 
 - Feed of posts
 
-Post consists of 
-    - Text
-    - Image
-    - Respect button
-    - Reply button
-    - Profile Image
+Post consists of - Text - Image - Respect button - Reply button - Profile Image
 
 Nav bar top
 
 Right - Create Post
 Left - Empty
 
-
-
-
+Sponsors Screen
+Sponsor Detail
+Create Sponsor

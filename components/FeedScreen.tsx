@@ -28,6 +28,7 @@ const FeedScreen = () => {
   return (
     <View style={styles.container}>
       <FlatList
+        style={{ paddingHorizontal: 10, paddingTop: 10 }}
         ListEmptyComponent={
           loading ? (
             <ActivityIndicator animating={true} color="blue" />
