@@ -236,9 +236,10 @@ const SignUp = () => {
               style={[
                 styles.signIn,
                 {
-                  borderColor: "#009387",
+                  borderColor: "purple",
                   borderWidth: 1,
                   marginTop: 15,
+                  opacity: 0.7,
                 },
               ]}
             >
@@ -246,7 +247,7 @@ const SignUp = () => {
                 style={[
                   styles.textSign,
                   {
-                    color: "#009387",
+                    color: "purple",
                   },
                 ]}
               >

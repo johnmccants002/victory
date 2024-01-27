@@ -14,9 +14,11 @@ import { useTheme } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 const Login = (props) => {
   const { setUser } = props;
+  const router = useRouter();
   const [data, setData] = React.useState({
     username: "",
     password: "",
@@ -212,6 +214,7 @@ const Login = (props) => {
                 marginTop: 15,
               },
             ]}
+            onPress={() => router.push("/signup")}
           >
             <Text
               style={[
