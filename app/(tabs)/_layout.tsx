@@ -24,7 +24,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="feed"
+        name="index"
         options={{
           title: "Victory",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,

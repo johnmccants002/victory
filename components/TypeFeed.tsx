@@ -8,16 +8,12 @@ import {
   RefreshControl,
 } from "react-native";
 import Post from "./Post"; // Import the Post component
-import { posts } from "../data/DummyData"; // Import your dummy data
-import { useRouter } from "expo-router";
+import { posts } from "../data/DummyData";
 
-const FeedScreen = () => {
+type Props = {};
+
+const TypeFeed = (props: Props) => {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const empty = null;
-  const showTypeFeed = () => {
-    router.push("/typefeed");
-  };
   const renderItem = ({ item }) => (
     <Post
       profileImage={item.profileImage}
@@ -27,10 +23,8 @@ const FeedScreen = () => {
       dateTime={item.dateTime}
       onReply={() => console.log("Reply clicked on post", item.id)}
       onRespect={() => console.log("Respect clicked on post", item.id)}
-      onPressType={showTypeFeed}
     />
   );
-
   return (
     <View style={styles.container}>
       <FlatList
@@ -57,7 +51,6 @@ const FeedScreen = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -68,5 +61,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-export default FeedScreen;
+export default TypeFeed;

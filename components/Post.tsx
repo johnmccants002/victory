@@ -16,8 +16,10 @@ interface PostProps {
   name: string;
   text: string;
   postImage?: string;
+  type?: string;
   onReply: () => void;
   onRespect: () => void;
+  onPressType?: () => void;
   dateTime: string;
 }
 
@@ -29,6 +31,7 @@ const Post: React.FC<PostProps> = ({
   onReply,
   onRespect,
   dateTime,
+  onPressType,
 }) => {
   const handleSettingsPress = () => {
     Alert.alert(
@@ -80,6 +83,32 @@ const Post: React.FC<PostProps> = ({
         <Image source={{ uri: postImage }} style={styles.postImage} />
       )}
       <Text style={styles.dateTime}>{dateTime}</Text>
+      <View
+        style={{
+          width: "auto",
+
+          height: 40,
+          justifyContent: "space-between",
+          flexDirection: "row",
+          padding: 8,
+        }}
+      >
+        <View></View>
+        <TouchableOpacity
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            width: "auto",
+
+            borderRadius: 8,
+            paddingHorizontal: 12,
+            backgroundColor: "skyblue",
+          }}
+          onPress={onPressType}
+        >
+          <Text style={{ color: "white" }}>Workout</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.actions}>
         <TouchableOpacity onPress={onReply} style={styles.button}>
           <Text>Reply</Text>

@@ -82,6 +82,8 @@ function RootLayoutNav() {
         />
         <Stack.Screen name="createsponsor" options={{ title: "New Sponsor" }} />
         <Stack.Screen name="userprofile" options={{ title: "Profile" }} />
+        <Stack.Screen name="typefeed" options={{ title: "Workout" }} />
+        <Stack.Screen name="selecttype" options={{ title: "Select Type" }} />
       </Stack>
     </ThemeProvider>
   );

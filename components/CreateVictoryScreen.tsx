@@ -14,6 +14,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 export interface CurrentUser {
   id: string;
@@ -22,6 +23,7 @@ const CreateVictoryScreen = () => {
   const [currUser, setCurrUser] = useState<CurrentUser | null>(null);
   const [imageUri, setImageUri] = useState(null);
   const [imgData, setImgData] = useState(null);
+  const router = useRouter();
 
   const [victory, setVictory] = useState(null);
   const [victoryText, setVictoryText] = useState("");
@@ -60,11 +62,27 @@ const CreateVictoryScreen = () => {
           />
           <View
             style={{
-              flexDirection: "row-reverse",
+              flexDirection: "row",
               width: "100%",
-              marginLeft: 20,
+              paddingHorizontal: 20,
+
+              justifyContent: "space-between",
             }}
           >
+            <TouchableOpacity
+              style={{
+                backgroundColor: "green",
+                width: "auto",
+                padding: 12,
+                borderRadius: 12,
+                height: 40,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onPress={() => router.push("/selecttype")}
+            >
+              <Text style={{ color: "white" }}>Select Type</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={handleChooseImage}>
               <MaterialCommunityIcons
                 name="image-plus"
