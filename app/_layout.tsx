@@ -7,8 +7,10 @@ import {
 import { useFonts } from "expo-font";
 import { Link, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { Pressable, useColorScheme } from "react-native";
+import { Pressable, useColorScheme, Text } from "react-native";
 import Colors from "../constants/Colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "expo-router";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -48,6 +50,8 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const navigation = useNavigation();
+
   const colorScheme = useColorScheme();
 
   return (
@@ -83,7 +87,18 @@ function RootLayoutNav() {
         <Stack.Screen name="createsponsor" options={{ title: "New Sponsor" }} />
         <Stack.Screen name="userprofile" options={{ title: "Profile" }} />
         <Stack.Screen name="typefeed" options={{ title: "Workout" }} />
-        <Stack.Screen name="selecttype" options={{ title: "Select Type" }} />
+        <Stack.Screen
+          name="selecttype"
+          options={{
+            title: "Select Type",
+            presentation: "fullScreenModal",
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <FontAwesome name="close" size={20} />
+              </TouchableOpacity>
+            ),
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

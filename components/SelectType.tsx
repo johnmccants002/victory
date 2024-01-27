@@ -1,3 +1,4 @@
+import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
   View,
@@ -7,11 +8,13 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import { useNavigation } from "expo-router";
 
 type Props = {};
 
 const SelectType: React.FC<Props> = (props) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const navigation = useNavigation();
   const [types, setTypes] = useState<string[]>([
     "Fitness",
     "Education",
@@ -26,11 +29,14 @@ const SelectType: React.FC<Props> = (props) => {
 
   const handleSelectType = (type: string) => {
     console.log("Selected Type:", type);
+    navigation.goBack();
     // Handle the selection
   };
 
   const handleCreateNewType = () => {
     console.log("Creating New Type:", searchQuery);
+    setTypes([...types, searchQuery]);
+    setSearchQuery("");
     // Add logic to create a new type
   };
 
@@ -54,6 +60,7 @@ const SelectType: React.FC<Props> = (props) => {
             onPress={() => handleSelectType(type)}
           >
             <Text style={styles.typeText}>{type}</Text>
+            <FontAwesome name="chevron-right" color={"gray"} />
           </TouchableOpacity>
         ))}
 
@@ -73,6 +80,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: "white",
   },
   searchInput: {
     borderWidth: 1,
@@ -82,9 +90,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   typeItem: {
-    padding: 10,
-    borderBottomWidth: 1,
+    padding: 16,
+    borderBottomWidth: 2,
     borderBottomColor: "#eee",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   typeText: {
     fontSize: 16,
