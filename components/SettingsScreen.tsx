@@ -1,6 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useNavigation } from "expo-router/src/useNavigation";
 import React, { useState } from "react";
 import {
   View,
@@ -14,7 +13,6 @@ const SettingsScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [coinAmount, setCoinAmount] = useState("");
-  const navigation = useNavigation();
   const router = useRouter();
 
   const dismiss = () => {

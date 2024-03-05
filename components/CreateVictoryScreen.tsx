@@ -12,7 +12,6 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
-import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
@@ -27,7 +26,6 @@ const CreateVictoryScreen = () => {
 
   const [victory, setVictory] = useState(null);
   const [victoryText, setVictoryText] = useState("");
-  const navigation = useNavigation();
 
   // S3 Bucket Upload Function
 

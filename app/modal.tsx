@@ -3,8 +3,7 @@ import { Platform, StyleSheet } from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-import CreateVictoryScreen from "../components/CreateVictoryScreen";
-
+import CreateVictoryScreen from "../components/CreateVictoryNew";
 export default function CreateVictory() {
   return <CreateVictoryScreen />;
 }
