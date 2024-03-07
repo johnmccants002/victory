@@ -23,7 +23,10 @@ export const signUp = async (email: string, password: string) => {
 };
 
 // Function to sign in an existing user
-export const signIn = async (email: string, password: string) => {
+export const signIn = async (
+  email: string,
+  password: string
+): Promise<SignInResult> => {
   try {
     const response = await fetch(`${API_URL}/signin`, {
       method: "POST",

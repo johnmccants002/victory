@@ -16,6 +16,8 @@ import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import * as authService from "../services/auth";
+import { useAuth } from "../providers/AuthProvider";
+import * as SecureStore from "expo-secure-store";
 
 const Login = (props) => {
   const { setUser } = props;
@@ -32,6 +34,7 @@ const Login = (props) => {
   const { colors } = useTheme();
 
   const navigation = useNavigation();
+  const { setAccessToken, setCurrentUser } = useAuth();
 
   const textInputChange = (val: string) => {
     if (val.trim().length >= 4) {
@@ -90,7 +93,15 @@ const Login = (props) => {
 
   const loginHandle = async (email: string, password: string) => {
     const result = await authService.signIn(email, password);
-    console.log("Signin successful:", result);
+    console.log("Signin successful:", JSON.stringify(result));
+    if (Platform.OS == "web") {
+      localStorage.setItem("accessToken", result.accessToken);
+    } else {
+      await SecureStore.setItemAsync("accessToken", result.accessToken);
+    }
+    setAccessToken(result.accessToken);
+    setCurrentUser(result.user);
+    router.navigate("/");
     try {
     } catch (error) {
       console.log("ERROR: ", error);

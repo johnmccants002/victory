@@ -1,8 +1,12 @@
 import { API_URL } from "../constants/url";
 import * as SecureStore from "expo-secure-store";
+import { Platform } from "react-native";
 
 export const getCurrentUser = async () => {
-  const token = await SecureStore.getItem("token");
+  const token =
+    Platform.OS === "web"
+      ? localStorage.getItem("accessToken")
+      : await SecureStore.getItem("accessToken");
   try {
     const response = await fetch(`${API_URL}/users/current-user`, {
       method: "GET",
