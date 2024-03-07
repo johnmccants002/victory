@@ -1,7 +1,7 @@
 // services/api.js
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000"; // Change to your actual backend URL
+const BASE_URL = "http://localhost:3000/api"; // Change to your actual backend URL
 
 export const processToDoList = async (toDoList) => {
   console.log("IN THE FUNCTION");

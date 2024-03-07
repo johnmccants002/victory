@@ -12,6 +12,8 @@ import Colors from "../constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "expo-router";
 import { VictoriesProvider } from "../components/VictoriesContext";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "../queryClient";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,61 +59,66 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DefaultTheme : DefaultTheme}>
-      <VictoriesProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ title: "Create Victory" }} />
-          <Stack.Screen
-            name="preview-victories"
-            options={{ title: "Preview Victories" }}
-          />
+      <QueryClientProvider client={queryClient}>
+        <VictoriesProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ title: "Create Victory" }} />
+            <Stack.Screen
+              name="preview-victories"
+              options={{ title: "Preview Victories" }}
+            />
 
-          <Stack.Screen
-            name="sponsors"
-            options={{
-              title: "Your Sponsors",
-              headerRight: () => (
-                <Link href="/createsponsor" asChild>
-                  <Pressable>
-                    {({ pressed }) => (
-                      <FontAwesome
-                        name="user-plus"
-                        size={25}
-                        color={Colors[colorScheme ?? "light"].text}
-                        style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                      />
-                    )}
-                  </Pressable>
-                </Link>
-              ),
-            }}
-          />
-          <Stack.Screen name={"settings"} options={{ title: "Settings" }} />
-          <Stack.Screen
-            name="sponsordetail"
-            options={{ title: "Sponsor Details" }}
-          />
-          <Stack.Screen
-            name="createsponsor"
-            options={{ title: "New Sponsor" }}
-          />
-          <Stack.Screen name="userprofile" options={{ title: "Profile" }} />
-          <Stack.Screen name="typefeed" options={{ title: "Workout" }} />
-          <Stack.Screen
-            name="selecttype"
-            options={{
-              title: "Select Type",
-              presentation: "fullScreenModal",
-              headerLeft: () => (
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <FontAwesome name="close" size={20} />
-                </TouchableOpacity>
-              ),
-            }}
-          />
-        </Stack>
-      </VictoriesProvider>
+            <Stack.Screen
+              name="sponsors"
+              options={{
+                title: "Your Sponsors",
+                headerRight: () => (
+                  <Link href="/createsponsor" asChild>
+                    <Pressable>
+                      {({ pressed }) => (
+                        <FontAwesome
+                          name="user-plus"
+                          size={25}
+                          color={Colors[colorScheme ?? "light"].text}
+                          style={{
+                            marginRight: 15,
+                            opacity: pressed ? 0.5 : 1,
+                          }}
+                        />
+                      )}
+                    </Pressable>
+                  </Link>
+                ),
+              }}
+            />
+            <Stack.Screen name={"settings"} options={{ title: "Settings" }} />
+            <Stack.Screen
+              name="sponsordetail"
+              options={{ title: "Sponsor Details" }}
+            />
+            <Stack.Screen
+              name="createsponsor"
+              options={{ title: "New Sponsor" }}
+            />
+            <Stack.Screen name="userprofile" options={{ title: "Profile" }} />
+            <Stack.Screen name="typefeed" options={{ title: "Workout" }} />
+            <Stack.Screen
+              name="selecttype"
+              options={{
+                title: "Select Type",
+                presentation: "fullScreenModal",
+                headerLeft: () => (
+                  <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <FontAwesome name="close" size={20} />
+                  </TouchableOpacity>
+                ),
+              }}
+            />
+          </Stack>
+        </VictoriesProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

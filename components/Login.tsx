@@ -15,6 +15,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import * as authService from "../services/auth";
 
 const Login = (props) => {
   const { setUser } = props;
@@ -87,8 +88,9 @@ const Login = (props) => {
     }
   };
 
-  const loginHandle = async (userName: string, password: string) => {
-    console.log(userName, password, "LOGIN HANDLE");
+  const loginHandle = async (email: string, password: string) => {
+    const result = await authService.signIn(email, password);
+    console.log("Signin successful:", result);
     try {
     } catch (error) {
       console.log("ERROR: ", error);

@@ -16,6 +16,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as authService from "../services/auth";
 
 const SignUp = () => {
   const [data, setData] = React.useState({
@@ -83,9 +84,12 @@ const SignUp = () => {
 
   async function signUp() {
     try {
-      setCodeMode(true);
+      const result = await authService.signUp(email, password);
+      console.log("Signup successful:", result);
+      // Navigate to next screen or show success message
     } catch (error) {
-      console.log("error signing up:", error);
+      // Show error message
+      console.error(error);
     }
   }
 
@@ -208,7 +212,6 @@ const SignUp = () => {
             </Text>
             <Text style={styles.color_textPrivate}> and</Text>
             <Text style={[styles.color_textPrivate, { fontWeight: "bold" }]}>
-              {" "}
               Privacy policy
             </Text>
           </View>
