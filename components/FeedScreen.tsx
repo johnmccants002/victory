@@ -21,7 +21,12 @@ const formatDate = (dateString) => {
 };
 
 const groupVictoriesByDate = (victories) => {
-  const grouped = victories.reduce((groups, victory) => {
+  // First, sort victories by their `created_at` timestamps from newest to oldest
+  const sortedVictories = victories.sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  );
+
+  const grouped = sortedVictories.reduce((groups, victory) => {
     const date = formatDate(victory.created_at);
     if (!groups[date]) {
       groups[date] = [];
@@ -30,10 +35,13 @@ const groupVictoriesByDate = (victories) => {
     return groups;
   }, {});
 
-  return Object.entries(grouped).map(([date, victories]) => ({
+  // Convert the grouped object into an array and sort by date, newest first
+  const groupedArray = Object.entries(grouped).map(([date, victories]) => ({
     title: date,
     data: victories,
   }));
+
+  return groupedArray.sort((a, b) => new Date(b.title) - new Date(a.title));
 };
 
 const FeedScreen = () => {
@@ -106,8 +114,8 @@ const styles = StyleSheet.create({
   sectionHeader: {
     fontWeight: "bold",
     fontSize: 18,
-    marginTop: 20,
-    marginBottom: 5,
+    paddingTop: 20,
+    paddingBottom: 5,
     backgroundColor: "#f0f0f0",
     padding: 5,
   },

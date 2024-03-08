@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { processToDoList } from "../services/api";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useVictories } from "./VictoriesContext";
 import { createVictory } from "../services/victory";
 
@@ -18,6 +18,7 @@ const CreateVictoryScreen = () => {
   const [victoryText, setVictoryText] = useState("");
   const [victories, setVictories] = useState<object[] | null>(null);
   const { setPreviewVictories } = useVictories();
+  const router = useRouter();
 
   const handleSubmit = async () => {
     try {
@@ -25,6 +26,7 @@ const CreateVictoryScreen = () => {
       console.log("🚀 ~ handleSubmit ~ data:", data);
 
       alert("Victory created!");
+      router.replace("/(tabs)/");
     } catch (error) {
       alert("Failed to generate victories. Please try again.");
     }
