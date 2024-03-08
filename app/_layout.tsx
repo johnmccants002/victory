@@ -5,7 +5,7 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Link, SplashScreen, Stack } from "expo-router";
+import { Link, SplashScreen, Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { Pressable, useColorScheme, Text } from "react-native";
 import Colors from "../constants/Colors";
@@ -15,6 +15,7 @@ import { VictoriesProvider } from "../components/VictoriesContext";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "../queryClient";
 import { AuthProvider } from "../providers/AuthProvider";
+import { Ionicons } from "@expo/vector-icons";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,18 +58,27 @@ function RootLayoutNav() {
   const navigation = useNavigation();
 
   const colorScheme = useColorScheme();
+  const router = useRouter();
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DefaultTheme : DefaultTheme}>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <VictoriesProvider>
-            <Stack>
+            <Stack screenOptions={{ headerShown: false }}>
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="(auth)" options={{ headerShown: false }} />
               <Stack.Screen
-                name="modal"
-                options={{ title: "Create Victory" }}
+                name="create-victory"
+                options={{
+                  title: "Create Victory",
+                  headerShown: true,
+                  headerLeft: () => (
+                    <Pressable onPress={router.back}>
+                      <Ionicons name="arrow-back" size={30} />
+                    </Pressable>
+                  ),
+                }}
               />
               <Stack.Screen
                 name="preview-victories"
