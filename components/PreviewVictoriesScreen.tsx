@@ -13,7 +13,11 @@ import Post from "./Post";
 const PreviewVictoriesScreen = () => {
   const { previewVictories } = useVictories();
 
-  console.log(previewVictories, "THESE ARE THE PREVIEW VICTORIES");
+  console.log(
+    previewVictories,
+    "THESE ARE THE PREVIEW VICTORIES",
+    typeof previewVictories
+  );
 
   const renderItem = ({ item }) => (
     <Text style={{ color: "black" }}>{item.victoryText}</Text>
