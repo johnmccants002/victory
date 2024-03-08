@@ -8,12 +8,14 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import { useAuth } from "../providers/AuthProvider";
 
 const SettingsScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [coinAmount, setCoinAmount] = useState("");
   const router = useRouter();
+  const { logout } = useAuth();
 
   const dismiss = () => {
     router.back();
@@ -42,7 +44,7 @@ const SettingsScreen = () => {
           />
         </View>
 
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity style={styles.logoutButton} onPress={logout}>
           <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>
       </View>

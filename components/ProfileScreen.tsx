@@ -34,7 +34,11 @@ interface UserInfo {
 }
 
 const ProfileScreen = () => {
-  const { data: profile, refetch: refetchCurrentUserVictories } = useQuery({
+  const {
+    data: profile,
+    refetch: refetchCurrentUserVictories,
+    isLoading,
+  } = useQuery({
     queryKey: ["fetchCurrentUserProfile"],
     queryFn: fetchCurrentUserProfile,
     enabled: true, // Enable fetching if accessToken is available
@@ -51,25 +55,31 @@ const ProfileScreen = () => {
   }, [profile]);
   return (
     <ScrollView style={styles.scrollContainer}>
-      <View style={styles.container}>
-        <View style={styles.profileHeader}>
-          <Image
-            source={{
-              uri: profile.photo_url ? profile.photo_url : "default_image_uri",
-            }} // Replace "default_image_uri" with your actual placeholder image URI
-            style={styles.profileImage}
-          />
-          <Text style={styles.username}>{userInfo.username}</Text>
-          <Text
-            style={styles.name}
-          >{`${profile.first_name} ${profile.last_name}`}</Text>
+      {isLoading ? (
+        <></>
+      ) : (
+        <View style={styles.container}>
+          <View style={styles.profileHeader}>
+            <Image
+              source={{
+                uri: profile.photo_url
+                  ? profile.photo_url
+                  : "default_image_uri",
+              }} // Replace "default_image_uri" with your actual placeholder image URI
+              style={styles.profileImage}
+            />
+            <Text style={styles.username}>{userInfo.username}</Text>
+            <Text
+              style={styles.name}
+            >{`${profile.first_name} ${profile.last_name}`}</Text>
+          </View>
+          <View style={styles.aboutSection}>
+            <Text style={styles.sectionTitle}>About Me</Text>
+            <Text style={styles.aboutText}>{profile.about_me}</Text>
+            {/* Assuming 'about_me' is the field in your profile object */}
+          </View>
         </View>
-        <View style={styles.aboutSection}>
-          <Text style={styles.sectionTitle}>About Me</Text>
-          <Text style={styles.aboutText}>{profile.about_me}</Text>
-          {/* Assuming 'about_me' is the field in your profile object */}
-        </View>
-      </View>
+      )}
     </ScrollView>
   );
 };
