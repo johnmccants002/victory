@@ -82,7 +82,15 @@ function RootLayoutNav() {
               />
               <Stack.Screen
                 name="preview-victories"
-                options={{ title: "Preview Victories" }}
+                options={{
+                  title: "Preview Victories",
+                  headerShown: true,
+                  headerLeft: () => (
+                    <Pressable onPress={router.back}>
+                      <Ionicons name="arrow-back" size={30} />
+                    </Pressable>
+                  ),
+                }}
               />
 
               <Stack.Screen

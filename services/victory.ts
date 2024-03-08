@@ -2,6 +2,38 @@ import { API_URL } from "../constants/url";
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
 
+export const createVictories = async (victories: Array<object>) => {
+  const token =
+    Platform.OS === "web"
+      ? localStorage.getItem("accessToken")
+      : await SecureStore.getItem("accessToken");
+
+  console.log("CREATING VICTORIES");
+  try {
+    const response = await fetch(`${API_URL}/victories`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(victories),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || "Could not create victory.");
+    }
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log("ERROR creating victory", error.message);
+    } else {
+      // Handle cases where the error is not an instance of Error
+      console.log("An unexpected error occurred");
+    }
+    throw error;
+  }
+};
+
 export const createVictory = async (victoryText: string) => {
   const token =
     Platform.OS === "web"
@@ -14,11 +46,13 @@ export const createVictory = async (victoryText: string) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        victory_text: victoryText,
-        image_url: null,
-        category: "Standard",
-      }),
+      body: JSON.stringify([
+        {
+          victory_text: victoryText,
+          image_url: null,
+          category: "Standard",
+        },
+      ]),
     });
     const data = await response.json();
     if (!response.ok) {

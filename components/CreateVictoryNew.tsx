@@ -35,6 +35,7 @@ const CreateVictoryScreen = () => {
 
   const generateVictories = async () => {
     console.log("GENERATING VICTORIES");
+    console.log(victoryText, "THIS IS THE VICTORY TEXT");
     try {
       const data = await processToDoList(victoryText);
       console.log(

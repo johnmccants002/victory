@@ -5,6 +5,7 @@ const BASE_URL = "http://localhost:3000/api"; // Change to your actual backend U
 
 export const processToDoList = async (toDoList) => {
   console.log("IN THE FUNCTION");
+
   try {
     const response = await axios.post(
       `${BASE_URL}/ai-victories/processToDoList`,
