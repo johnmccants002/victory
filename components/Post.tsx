@@ -11,6 +11,12 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link } from "expo-router";
 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+}
+
 interface PostProps {
   profileImage: string;
   name: string;
@@ -21,6 +27,7 @@ interface PostProps {
   onRespect: () => void;
   onPressType?: () => void;
   dateTime: string;
+  category: string;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -32,6 +39,7 @@ const Post: React.FC<PostProps> = ({
   onRespect,
   dateTime,
   onPressType,
+  category,
 }) => {
   const handleSettingsPress = () => {
     Alert.alert(
@@ -82,7 +90,7 @@ const Post: React.FC<PostProps> = ({
       {postImage && (
         <Image source={{ uri: postImage }} style={styles.postImage} />
       )}
-      <Text style={styles.dateTime}>{dateTime}</Text>
+      <Text style={styles.dateTime}>{formatDate(dateTime)}</Text>
       <View
         style={{
           width: "auto",
@@ -106,10 +114,10 @@ const Post: React.FC<PostProps> = ({
           }}
           onPress={onPressType}
         >
-          <Text style={{ color: "white" }}>Workout</Text>
+          <Text style={{ color: "white" }}>{category}</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.actions}>
+      {/* <View style={styles.actions}>
         <TouchableOpacity onPress={onReply} style={styles.button}>
           <Text>Reply</Text>
           <FontAwesome name="reply" size={20} />
@@ -119,7 +127,7 @@ const Post: React.FC<PostProps> = ({
           <Text>Respect</Text>
           <FontAwesome name="thumbs-up" size={20} />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };

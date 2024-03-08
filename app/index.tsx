@@ -23,9 +23,10 @@ const Page = () => {
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
+          backgroundColor: "white",
         }}
       >
-        <Image source={require("../assets/images/splash.png")} />
+        {/* <Image source={require("../assets/images/splash.png")} /> */}
       </View>
     );
   }

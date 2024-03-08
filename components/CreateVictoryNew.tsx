@@ -12,20 +12,19 @@ import { processToDoList } from "../services/api";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Link } from "expo-router";
 import { useVictories } from "./VictoriesContext";
+import { createVictory } from "../services/victory";
 
 const CreateVictoryScreen = () => {
-  const [toDoList, setToDoList] = useState("");
+  const [victoryText, setVictoryText] = useState("");
   const [victories, setVictories] = useState<object[] | null>(null);
   const { setPreviewVictories } = useVictories();
 
   const handleSubmit = async () => {
     try {
-      const data = await processToDoList(toDoList);
-      console.log(JSON.stringify(data.victories), "DATA VICTORIES VICTORIES");
-      console.log(JSON.parse(data.victories), "PARSED");
-      const parsedVictories = JSON.parse(data.victories);
-      setVictories(data.victories); // Assuming the backend returns an object with a 'victories' key
-      setPreviewVictories(parsedVictories.victories);
+      const data = await createVictory(victoryText);
+      console.log("🚀 ~ handleSubmit ~ data:", data);
+
+      alert("Victory created!");
     } catch (error) {
       alert("Failed to generate victories. Please try again.");
     }
@@ -50,8 +49,8 @@ const CreateVictoryScreen = () => {
         <TextInput
           multiline
           placeholder="Paste your completed to-do list here"
-          value={toDoList}
-          onChangeText={setToDoList}
+          value={victoryText}
+          onChangeText={setVictoryText}
           style={{
             height: 100,
             borderColor: "gray",
@@ -60,8 +59,8 @@ const CreateVictoryScreen = () => {
           }}
         />
       )}
-      <Button title="Generate Victories" onPress={handleSubmit} />
-      {victories && <Text style={{ marginTop: 20 }}>{victories}</Text>}
+      <Button title="Create Victory" onPress={handleSubmit} />
+      {/* {victories && <Text style={{ marginTop: 20 }}>{victories}</Text>} */}
     </ScrollView>
   );
 };
