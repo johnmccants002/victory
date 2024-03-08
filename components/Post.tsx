@@ -90,7 +90,7 @@ const Post: React.FC<PostProps> = ({
       {postImage && (
         <Image source={{ uri: postImage }} style={styles.postImage} />
       )}
-      <Text style={styles.dateTime}>{formatDate(dateTime)}</Text>
+      {/* <Text style={styles.dateTime}>{formatDate(dateTime)}</Text> */}
       <View
         style={{
           width: "auto",
