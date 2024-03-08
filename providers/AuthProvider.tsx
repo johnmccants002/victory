@@ -7,7 +7,6 @@ import React, {
   ReactNode,
 } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { signIn } from "../services/auth";
 import { getCurrentUser } from "../services/user";
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";

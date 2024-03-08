@@ -20,8 +20,13 @@ export const getCurrentUser = async () => {
       throw new Error(data.error || "Could not complete signup.");
     }
     return data;
-  } catch (error) {
-    console.log("ERROR Getting User", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log("ERROR Getting User", error.message);
+    } else {
+      // Handle cases where the error is not an instance of Error
+      console.log("An unexpected error occurred");
+    }
     throw error;
   }
 };

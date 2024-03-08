@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:3000/api"; // Change this to your actual backend URL
-
+import { SignInResult } from "../interfaces/authResults";
 // Function to sign up a new user
 export const signUp = async (email: string, password: string) => {
   try {
@@ -15,9 +15,13 @@ export const signUp = async (email: string, password: string) => {
       throw new Error(data.error || "Could not complete signup.");
     }
     return data;
-  } catch (error) {
-    // Handle errors, e.g., show a notification or log
-    console.error("Signup error:", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log("ERROR Getting User", error.message);
+    } else {
+      // Handle cases where the error is not an instance of Error
+      console.log("An unexpected error occurred");
+    }
     throw error;
   }
 };
@@ -40,9 +44,13 @@ export const signIn = async (
       throw new Error(data.error || "Could not complete signin.");
     }
     return data;
-  } catch (error) {
-    // Handle errors, e.g., show a notification or log
-    console.error("Signin error:", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log("ERROR Getting User", error.message);
+    } else {
+      // Handle cases where the error is not an instance of Error
+      console.log("An unexpected error occurred");
+    }
     throw error;
   }
 };
