@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,15 +10,52 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
+  AppState,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { supabase } from "../lib/supabase";
 
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as authService from "../services/auth";
 
+import { makeRedirectUri } from "expo-auth-session";
+import * as QueryParams from "expo-auth-session/build/QueryParams";
+import * as WebBrowser from "expo-web-browser";
+import * as Linking from "expo-linking";
+
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
+
+WebBrowser.maybeCompleteAuthSession(); // required for web only
+const redirectTo = makeRedirectUri();
+
+const createSessionFromUrl = async (url: string) => {
+  const { params, errorCode } = QueryParams.getQueryParams(url);
+
+  if (errorCode) throw new Error(errorCode);
+  const { access_token, refresh_token } = params;
+
+  if (!access_token) return;
+
+  const { data, error } = await supabase.auth.setSession({
+    access_token,
+    refresh_token,
+  });
+  if (error) throw error;
+  return data.session;
+};
+
 const SignUp = () => {
+  const url = Linking.useURL();
+  if (url) createSessionFromUrl(url);
   const [data, setData] = React.useState({
     username: "",
     password: "",
@@ -29,6 +66,7 @@ const SignUp = () => {
   });
   const [code, setCode] = React.useState<string>("");
   const [codeMode, setCodeMode] = React.useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigation = useNavigation();
 
@@ -83,14 +121,19 @@ const SignUp = () => {
   };
 
   async function signUp() {
-    try {
-      const result = await authService.signUp(email, password);
-      console.log("Signup successful:", result);
-      // Navigate to next screen or show success message
-    } catch (error) {
-      // Show error message
-      console.error(error);
-    }
+    setLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: data.username,
+      password: data.password,
+    });
+
+    if (error) Alert.alert(error.message);
+    if (!session)
+      Alert.alert("Please check your inbox for email verification!");
+    setLoading(false);
   }
 
   async function confirmSignUp() {
@@ -216,12 +259,7 @@ const SignUp = () => {
             </Text>
           </View>
           <View style={styles.button}>
-            <TouchableOpacity
-              style={styles.signIn}
-              onPress={() => {
-                codeMode ? confirmSignUp() : signUp();
-              }}
-            >
+            <TouchableOpacity style={styles.signIn} onPress={signUp}>
               <Text
                 style={[
                   styles.textSign,

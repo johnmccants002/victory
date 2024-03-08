@@ -1,7 +1,9 @@
 import { Redirect } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../providers/AuthProvider";
 import { View, Image } from "react-native";
+import { Session } from "@supabase/supabase-js";
+import { supabase } from "../lib/supabase";
 
 type Props = {};
 
@@ -9,6 +11,17 @@ const Page = () => {
   const { currentUser, loading } = useAuth();
 
   console.log("CURRENT LOADING: ", loading);
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
 
   useEffect(() => {
     console.log(loading, "THIS IS THE LOADING");
@@ -26,7 +39,7 @@ const Page = () => {
   }
 
   // Your existing logic for redirect based on currentUser
-  return currentUser ? (
+  return session && session.user ? (
     <Redirect href={"/(tabs)/"} />
   ) : (
     <Redirect href={"/(auth)/login"} />
