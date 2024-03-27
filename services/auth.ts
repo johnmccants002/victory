@@ -31,6 +31,13 @@ export const signIn = async (
   email: string,
   password: string
 ): Promise<SignInResult> => {
+  console.log(
+    email,
+    password,
+    "THIS IS THE EMAIL AND PASSWORD",
+    "API URL",
+    API_URL
+  );
   try {
     const response = await fetch(`${API_URL}/signin`, {
       method: "POST",

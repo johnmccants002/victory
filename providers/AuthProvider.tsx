@@ -90,7 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     console.log("🚀 ~ useEffect ~ user:", user);
 
-    if (user) {
+    if (user && !currentUser) {
       console.log("SETTING THE USER");
       setCurrentUser(user);
     }

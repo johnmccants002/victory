@@ -13,6 +13,7 @@ import { posts } from "../data/DummyData"; // Import your dummy data
 import { useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCurrentUserVictories } from "../services/victory";
+import { useAuth } from "../providers/AuthProvider";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -46,20 +47,18 @@ const groupVictoriesByDate = (victories) => {
 
 const FeedScreen = () => {
   const [loading, setLoading] = useState(false);
+  const { currentUser } = useAuth();
   const router = useRouter();
   const empty = null;
   const { data: victories, refetch: refetchCurrentUserVictories } = useQuery({
     queryKey: ["fetchCurrentUserVictories"],
     queryFn: fetchCurrentUserVictories,
-    enabled: true, // Enable fetching if accessToken is available
+    enabled: currentUser != null, // Enable fetching if accessToken is available
   });
   const showTypeFeed = () => {
     router.push("/typefeed");
   };
 
-  useEffect(() => {
-    console.log("🚀 ~ FeedScreen ~ victories:", victories);
-  }, [victories]);
   const renderItem = ({ item }) => (
     <Post
       profileImage={"https://i.imgur.com/y1SvStU.png"}
