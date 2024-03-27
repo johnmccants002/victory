@@ -36,10 +36,10 @@
 
 This is a pet project where I am having the user be able to post in any kind of text and the a call to OpenAI is made to parse out the victories. Changes a todo list into a todone list.
 
-<div style="display: flex; justify-content: space-around;">
-  <img src="https://i.imgur.com/UJstteV.png" alt="Logo" width="200">
-  <img src="https://i.imgur.com/RHpy1WO.png" alt="Logo" width="200">
-  <img src="https://i.imgur.com/Bgcu0ab.png" alt="Logo" width="200">
+<div style="display: flex; justify-content: space-around; gap: 10;">
+  <img src="https://i.imgur.com/UJstteV.png" alt="Logo" width="240">
+  <img src="https://i.imgur.com/RHpy1WO.png" alt="Logo" width="240">
+  <img src="https://i.imgur.com/Bgcu0ab.png" alt="Logo" width="240">
 </div>
 
 ## Built With
